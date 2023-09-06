@@ -360,9 +360,11 @@ const AHP = () => {
     let startIndexTemp = 0;
     const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
 
+    const dataToAnova = perangkingan?.map((item) => Number(item.toFixed(10)));
+
     const dataUji = tempDevided.map((item) => {
       const sliceEnd = Object.values(item)[0];
-      const slicedData = perangkingan?.slice(
+      const slicedData = dataToAnova?.slice(
         startIndexTemp,
         startIndexTemp + sliceEnd
       );
@@ -370,7 +372,8 @@ const AHP = () => {
       return slicedData;
     });
 
-    const result = perangkingan !== undefined && fOnewayAnova(dataUji);
+    console.log({ dataToAnova });
+    const result = dataToAnova !== undefined && fOnewayAnova(dataUji);
     dispatch(
       changeDataAnova({
         name: 'AHP',

@@ -30,16 +30,6 @@ const Perbandingan = () => {
   const kodeAlt = joinData?.map((data) => data.kode);
   const anova = useSelector(getResultDataUji);
 
-  console.log({ anova });
-
-  // const first = data.slice(0, 7);
-  // const second = data.slice(7, 12);
-  // const third = data.slice(12);
-
-  // const result = fOnewayAnova([first, second, third]);
-
-  // console.log(result);
-
   return (
     <Grid container columns={12} spacing={3}>
       <Grid item xs={12}>

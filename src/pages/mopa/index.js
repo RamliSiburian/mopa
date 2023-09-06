@@ -288,9 +288,11 @@ const MOPA = () => {
     let startIndexTemp = 0;
     const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
 
+    const dataToAnova = perangkingan?.map((item) => Number(item));
+
     const dataUji = tempDevided.map((item) => {
       const sliceEnd = Object.values(item)[0];
-      const slicedData = perangkingan?.slice(
+      const slicedData = dataToAnova?.slice(
         startIndexTemp,
         startIndexTemp + sliceEnd
       );
@@ -298,7 +300,9 @@ const MOPA = () => {
       return slicedData;
     });
 
-    const result = perangkingan !== undefined && fOnewayAnova(dataUji);
+    console.log({ dataUji });
+
+    const result = dataToAnova !== undefined && fOnewayAnova(dataUji);
     dispatch(
       changeDataAnova({
         name: 'Mopa',
