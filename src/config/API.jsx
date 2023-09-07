@@ -5,6 +5,9 @@ export const API = axios.create({
   //  baseURL : 'http://localhost:5000/api/v1'
   // 'https://mcdm.up.railway.app/api/v1/
 });
+export const ANOVA = axios.create({
+  baseURL: 'https://long-lime-dragonfly-cap.cyclic.app',
+});
 
 export const setAuthToken = (token) => {
   if (token) {

@@ -12,30 +12,30 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-} from "@mui/material";
-import Reac, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+} from '@mui/material';
+import Reac, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeJoinData,
   fetchDataAlternatif,
   getAllDataAlternatifState,
-} from "../../store/alternatif/AlternatifData";
+} from '../../store/alternatif/AlternatifData';
 import {
   fetchDataKriteria,
   getAllDataKriteria,
-} from "../../store/kriteria/KriteriaDatas";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { changeNilaiAkhirAHP } from "../../store/ahp";
+} from '../../store/kriteria/KriteriaDatas';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { changeNilaiAkhirAHP } from '../../store/ahp';
 import {
   fetchPerbandinganAhp,
   getAllPerbandinganAhp,
-} from "../../store/perbandinganAhp/perbandinganAhp";
+} from '../../store/perbandinganAhp/perbandinganAhp';
 import {
   fetchPerbandinganKriteriaAhp,
   getAllPerbandinganKriteriaAhp,
-} from "../../store/perbandinganKriteriaAhp/perbandinganKriteriaAhp";
-import { changeDataAnova } from "../../store/anova";
-import { oneWay } from "ml-anova";
+} from '../../store/perbandinganKriteriaAhp/perbandinganKriteriaAhp';
+import { changeDataAnova } from '../../store/anova';
+import { getResultAnova } from '../../config/perbandinganMopa';
 
 const AHP = () => {
   const { dataPerbandingan, isLoading } = useSelector(getAllPerbandinganAhp);
@@ -48,7 +48,7 @@ const AHP = () => {
   const dataKriteria = useSelector(getAllDataKriteria);
   const [newDataToShow, setNewDataToShow] = useState([]);
 
-  const [expanded, setExpanded] = useState("panel1");
+  const [expanded, setExpanded] = useState('panel1');
 
   useEffect(() => {
     dispatch(fetchPerbandinganAhp());
@@ -287,7 +287,7 @@ const AHP = () => {
   );
 
   const saveFinalResult = async () => {
-    const metode = "ahp";
+    const metode = 'ahp';
     const result = perangkingan;
 
     try {
@@ -299,7 +299,7 @@ const AHP = () => {
   };
 
   // ! uji anova
-  const jStat = require("jstat");
+  const jStat = require('jstat');
 
   function fOnewayAnova(groups) {
     const groupMeans = groups.map(
@@ -357,12 +357,29 @@ const AHP = () => {
     saveFinalResult();
   }, [perangkingan]);
 
+  const getAnova = async (data) => {
+    const params = {
+      data: data,
+      classes: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2],
+    };
+    try {
+      const { data: data } = await getResultAnova(params);
+      dispatch(
+        changeDataAnova({
+          name: 'AHP',
+          data: data?.testValue,
+          pValue: data?.pValue,
+        })
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     // let startIndexTemp = 0;
     // const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
-
-    // const dataToAnova = perangkingan?.map((item) => Number(item.toFixed(10)));
-
+    const dataToAnova = perangkingan?.map((item) => Number(item.toFixed(3)));
     // const dataUji = tempDevided.map((item) => {
     //   const sliceEnd = Object.values(item)[0];
     //   const slicedData = dataToAnova?.slice(
@@ -372,7 +389,6 @@ const AHP = () => {
     //   startIndexTemp += sliceEnd;
     //   return slicedData;
     // });
-
     // console.log({ dataToAnova });
     // const result = dataToAnova !== undefined && fOnewayAnova(dataUji);
     // dispatch(
@@ -382,11 +398,8 @@ const AHP = () => {
     //     pValue: result?.p_Value,
     //   })
     // );
-
-    const classes = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2];
-
-    const result = oneWay(perangkingan, classes, { alpha: 0.05 });
-    console.log({ result });
+    // console.log({ result });
+    const result = dataToAnova !== undefined && getAnova(dataToAnova);
   }, [perangkingan]);
 
   // !------------------------------------
@@ -395,7 +408,7 @@ const AHP = () => {
     <Grid container columns={12} spacing={2}>
       <Grid item xs={12}>
         <Box>
-          <Typography sx={{ fontWeight: 600, fontSize: "20px" }}>
+          <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
             Perhitungan Menggunakan metode AHP
           </Typography>
           <Divider />
@@ -405,9 +418,9 @@ const AHP = () => {
       {/* langkah 1 */}
       <Grid item xs={12}>
         <Accordion
-          sx={{ border: "none", background: "#FAFAFA" }}
-          expanded={expanded === "panel1"}
-          onChange={handleChange("panel1")}
+          sx={{ border: 'none', background: '#FAFAFA' }}
+          expanded={expanded === 'panel1'}
+          onChange={handleChange('panel1')}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -417,8 +430,8 @@ const AHP = () => {
             <Typography
               sx={{
                 fontWeight: 500,
-                fontSize: "16px",
-                textDecoration: "underline",
+                fontSize: '16px',
+                textDecoration: 'underline',
               }}
             >
               Langkah I : Normalisasi
@@ -428,7 +441,7 @@ const AHP = () => {
             <TableContainer sx={{ mt: 2 }}>
               <Table aria-label="simple table" size="small">
                 <TableHead>
-                  <TableRow sx={{ background: "#FAFAFA" }}>
+                  <TableRow sx={{ background: '#FAFAFA' }}>
                     <TableCell align="left">Nama Alternatif</TableCell>
                     {kodeKriteria.map((kode, index) => (
                       <TableCell align="left" key={index}>
@@ -445,7 +458,7 @@ const AHP = () => {
                       </TableCell>
                       {item?.nilai?.map((nilaiC, index) => (
                         <TableCell align="left" key={index}>
-                          {nilaiC || "-"}
+                          {nilaiC || '-'}
                           {/* {item.nilai[index]} */}
                         </TableCell>
                       ))}
@@ -461,9 +474,9 @@ const AHP = () => {
       {/* langkah 2. */}
       <Grid item xs={12}>
         <Accordion
-          sx={{ border: "none", background: "#FAFAFA" }}
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
+          sx={{ border: 'none', background: '#FAFAFA' }}
+          expanded={expanded === 'panel2'}
+          onChange={handleChange('panel2')}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -473,8 +486,8 @@ const AHP = () => {
             <Typography
               sx={{
                 fontWeight: 500,
-                fontSize: "16px",
-                textDecoration: "underline",
+                fontSize: '16px',
+                textDecoration: 'underline',
               }}
             >
               Langkah 2 : Perbandingan Berpasangan Kriteria
@@ -543,7 +556,7 @@ const AHP = () => {
                       ))}
                     </TableRow>
                   ))}
-                  <TableRow sx={{ background: "#CFCFCF", fontWeight: 600 }}>
+                  <TableRow sx={{ background: '#CFCFCF', fontWeight: 600 }}>
                     <TableCell sx={{ fontWeight: 600 }}>Total</TableCell>
                     {totalPerKolom.map((total, index) => (
                       <TableCell key={index} sx={{ fontWeight: 600 }}>
@@ -562,9 +575,9 @@ const AHP = () => {
       {/* langkah 2.1 */}
       <Grid item xs={12}>
         <Accordion
-          sx={{ border: "none", background: "#FAFAFA" }}
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
+          sx={{ border: 'none', background: '#FAFAFA' }}
+          expanded={expanded === 'panel3'}
+          onChange={handleChange('panel3')}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -574,8 +587,8 @@ const AHP = () => {
             <Typography
               sx={{
                 fontWeight: 500,
-                fontSize: "16px",
-                textDecoration: "underline",
+                fontSize: '16px',
+                textDecoration: 'underline',
               }}
             >
               Langkah 2.1 : Nilai rata-rata
@@ -622,7 +635,7 @@ const AHP = () => {
       {cekMapAlt?.map((kode, idxKode) => (
         <Grid item xs={12} key={idxKode}>
           <Accordion
-            sx={{ border: "none", background: "#FAFAFA" }}
+            sx={{ border: 'none', background: '#FAFAFA' }}
             expanded={expanded === `panel1${idxKode + 4}`}
             onChange={handleChange(`panel1${idxKode + 4}`)}
           >
@@ -634,8 +647,8 @@ const AHP = () => {
               <Typography
                 sx={{
                   fontWeight: 500,
-                  fontSize: "16px",
-                  textDecoration: "underline",
+                  fontSize: '16px',
+                  textDecoration: 'underline',
                 }}
               >
                 Langkah 3 : Perbandingan Berpasangan Alternatif terhadap
@@ -664,7 +677,7 @@ const AHP = () => {
                         ))}
                       </TableRow>
                     ))}
-                    <TableRow sx={{ background: "#CFCFCF", fontWeight: 600 }}>
+                    <TableRow sx={{ background: '#CFCFCF', fontWeight: 600 }}>
                       <TableCell sx={{ fontWeight: 600 }}>Total</TableCell>
                       {totalPerbandinganAltKriteria[idxKode].map(
                         (total, index) => (
@@ -720,8 +733,8 @@ const AHP = () => {
           <Typography
             sx={{
               fontWeight: 500,
-              fontSize: "16px",
-              textDecoration: "underline",
+              fontSize: '16px',
+              textDecoration: 'underline',
             }}
           >
             Langkah 4 : Perangkingan
@@ -731,7 +744,7 @@ const AHP = () => {
         <TableContainer sx={{ mt: 2 }}>
           <Table size="small">
             <TableHead>
-              <TableRow sx={{ background: "#9D9D9D", fontWeight: 600 }}>
+              <TableRow sx={{ background: '#9D9D9D', fontWeight: 600 }}>
                 <TableCell sx={{ fontWeight: 600 }}>Alternatif</TableCell>
                 <TableCell sx={{ fontWeight: 600 }}>Hasil Analisis</TableCell>
               </TableRow>
@@ -745,7 +758,7 @@ const AHP = () => {
                         Math.max(...perangkingan) === perangkingan[idx] && 600,
                       background:
                         Math.max(...perangkingan) === perangkingan[idx] &&
-                        "#E9E9E9",
+                        '#E9E9E9',
                     }}
                   >
                     {kodeAlt[idx]}
@@ -756,7 +769,7 @@ const AHP = () => {
                         Math.max(...perangkingan) === perangkingan[idx] && 600,
                       background:
                         Math.max(...perangkingan) === perangkingan[idx] &&
-                        "#E9E9E9",
+                        '#E9E9E9',
                     }}
                   >
                     {item.toFixed(3)}

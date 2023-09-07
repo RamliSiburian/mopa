@@ -28,6 +28,7 @@ import { changeNilaiAkhirMopa } from '../../store/mopa';
 import { getAllPerbandinganMopa } from '../../store/perbandinganMopa/perbandinganMopa';
 import { getAllPerbandinganKriteriaAhp } from '../../store/perbandinganKriteriaAhp/perbandinganKriteriaAhp';
 import { changeDataAnova } from '../../store/anova';
+import { getResultAnova } from '../../config/perbandinganMopa';
 
 const MOPA = () => {
   const { dataPerbandinganMopa, isLoading } = useSelector(
@@ -284,32 +285,55 @@ const MOPA = () => {
     };
   }
 
-  useEffect(() => {
-    let startIndexTemp = 0;
-    const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
-
-    const dataToAnova = perangkingan?.map((item) => Number(item));
-
-    const dataUji = tempDevided.map((item) => {
-      const sliceEnd = Object.values(item)[0];
-      const slicedData = dataToAnova?.slice(
-        startIndexTemp,
-        startIndexTemp + sliceEnd
+  const getAnova = async (data) => {
+    const params = {
+      data: data,
+      classes: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2],
+    };
+    try {
+      const { data: data } = await getResultAnova(params);
+      dispatch(
+        changeDataAnova({
+          name: 'Mopa',
+          data: data?.testValue,
+          pValue: data?.pValue,
+        })
       );
-      startIndexTemp += sliceEnd;
-      return slicedData;
-    });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    console.log({ dataUji });
+  useEffect(() => {
+    // let startIndexTemp = 0;
+    // const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
 
-    const result = dataToAnova !== undefined && fOnewayAnova(dataUji);
-    dispatch(
-      changeDataAnova({
-        name: 'Mopa',
-        data: result?.F,
-        pValue: result?.p_Value,
-      })
-    );
+    // const dataToAnova = perangkingan?.map((item) => Number(item));
+
+    // const dataUji = tempDevided.map((item) => {
+    //   const sliceEnd = Object.values(item)[0];
+    //   const slicedData = dataToAnova?.slice(
+    //     startIndexTemp,
+    //     startIndexTemp + sliceEnd
+    //   );
+    //   startIndexTemp += sliceEnd;
+    //   return slicedData;
+    // });
+
+    // console.log({ dataUji });
+
+    // const result = dataToAnova !== undefined && fOnewayAnova(dataUji);
+    // dispatch(
+    //   changeDataAnova({
+    //     name: 'Mopa',
+    //     data: result?.F,
+    //     pValue: result?.p_Value,
+    //   })
+    // );
+    const dataToAnova = perangkingan?.map((item) => Number(item.toFixed(3)));
+    dataToAnova !== undefined &&
+      dataToAnova.length !== 0 &&
+      getAnova(dataToAnova);
   }, [perangkingan, newDataToShow]);
 
   useEffect(() => {

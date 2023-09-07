@@ -23,6 +23,7 @@ import {
 } from '../../store/kriteria/KriteriaDatas';
 import { changeNilaiAkhirTopsis } from '../../store/topsis';
 import { changeDataAnova } from '../../store/anova';
+import { getResultAnova } from '../../config/perbandinganMopa';
 
 const Topsis = () => {
   const dispatch = useDispatch();
@@ -170,79 +171,107 @@ const Topsis = () => {
   // ! uji anova
   const jStat = require('jstat');
 
-  function fOnewayAnova(groups) {
-    const groupMeans = groups.map(
-      (group) => group.reduce((sum, value) => sum + value, 0) / group.length
-    );
-    const totalMean =
-      groupMeans.reduce((sum, mean) => sum + mean, 0) / groupMeans.length;
+  // function fOnewayAnova(groups) {
+  //   const groupMeans = groups.map(
+  //     (group) => group.reduce((sum, value) => sum + value, 0) / group.length
+  //   );
+  //   const totalMean =
+  //     groupMeans.reduce((sum, mean) => sum + mean, 0) / groupMeans.length;
 
-    const betweenGroupSumOfSquares = groupMeans.reduce(
-      (sum, mean, index) =>
-        sum + groups[index].length * Math.pow(mean - totalMean, 2),
-      0
-    );
+  //   const betweenGroupSumOfSquares = groupMeans.reduce(
+  //     (sum, mean, index) =>
+  //       sum + groups[index].length * Math.pow(mean - totalMean, 2),
+  //     0
+  //   );
 
-    const withinGroupSumOfSquares = groups.reduce((sum, group, index) => {
-      const groupMean = groupMeans[index];
-      const groupSumOfSquares = group.reduce(
-        (groupSum, value) => groupSum + Math.pow(value - groupMean, 2),
-        0
-      );
-      return sum + groupSumOfSquares;
-    }, 0);
+  //   const withinGroupSumOfSquares = groups.reduce((sum, group, index) => {
+  //     const groupMean = groupMeans[index];
+  //     const groupSumOfSquares = group.reduce(
+  //       (groupSum, value) => groupSum + Math.pow(value - groupMean, 2),
+  //       0
+  //     );
+  //     return sum + groupSumOfSquares;
+  //   }, 0);
 
-    const betweenGroupDegreesOfFreedom = groups.length - 1;
-    const withinGroupDegreesOfFreedom = groups.reduce(
-      (sum, group) => sum + group.length - 1,
-      0
-    );
+  //   const betweenGroupDegreesOfFreedom = groups.length - 1;
+  //   const withinGroupDegreesOfFreedom = groups.reduce(
+  //     (sum, group) => sum + group.length - 1,
+  //     0
+  //   );
 
-    const betweenGroupMeanSquare =
-      betweenGroupSumOfSquares / betweenGroupDegreesOfFreedom;
-    const withinGroupMeanSquare =
-      withinGroupSumOfSquares / withinGroupDegreesOfFreedom;
+  //   const betweenGroupMeanSquare =
+  //     betweenGroupSumOfSquares / betweenGroupDegreesOfFreedom;
+  //   const withinGroupMeanSquare =
+  //     withinGroupSumOfSquares / withinGroupDegreesOfFreedom;
 
-    const fStatistic = betweenGroupMeanSquare / withinGroupMeanSquare;
+  //   const fStatistic = betweenGroupMeanSquare / withinGroupMeanSquare;
 
-    // Calculate p-value
-    const pValue =
-      1 -
-      jStat.centralF.cdf(
-        fStatistic,
-        betweenGroupDegreesOfFreedom,
-        withinGroupDegreesOfFreedom
-      );
+  //   // Calculate p-value
+  //   const pValue =
+  //     1 -
+  //     jStat.centralF.cdf(
+  //       fStatistic,
+  //       betweenGroupDegreesOfFreedom,
+  //       withinGroupDegreesOfFreedom
+  //     );
 
-    return {
-      F: fStatistic,
-      p_Value: pValue,
+  //   return {
+  //     F: fStatistic,
+  //     p_Value: pValue,
+  //   };
+  // }
+
+  // useEffect(() => {
+  //   let startIndexTemp = 0;
+  //   const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
+
+  //   const dataUji = tempDevided.map((item) => {
+  //     const sliceEnd = Object.values(item)[0];
+  //     const slicedData = finalResult?.slice(
+  //       startIndexTemp,
+  //       startIndexTemp + sliceEnd
+  //     );
+  //     startIndexTemp += sliceEnd;
+  //     return slicedData;
+  //   });
+
+  //   const result = finalResult !== undefined && fOnewayAnova(dataUji);
+  //   dispatch(
+  //     changeDataAnova({
+  //       name: 'Topsis',
+  //       data: result?.F,
+  //       pValue: result?.p_Value,
+  //     })
+  //   );
+  // }, [finalResult, newDataToShow]);
+
+  const getAnova = async (data) => {
+    const params = {
+      data: data,
+      classes: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2],
     };
-  }
+    try {
+      const { data: data } = await getResultAnova(params);
+      dispatch(
+        changeDataAnova({
+          name: 'Topsis',
+          data: data?.testValue,
+          pValue: data?.pValue,
+        })
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    let startIndexTemp = 0;
-    const tempDevided = [{ data1: 7 }, { data2: 4 }, { data3: 7 }];
-
-    const dataUji = tempDevided.map((item) => {
-      const sliceEnd = Object.values(item)[0];
-      const slicedData = finalResult?.slice(
-        startIndexTemp,
-        startIndexTemp + sliceEnd
-      );
-      startIndexTemp += sliceEnd;
-      return slicedData;
-    });
-
-    const result = finalResult !== undefined && fOnewayAnova(dataUji);
-    dispatch(
-      changeDataAnova({
-        name: 'Topsis',
-        data: result?.F,
-        pValue: result?.p_Value,
-      })
-    );
-  }, [finalResult, newDataToShow]);
+    const dataToAnova = finalResult?.map((item) => Number(item.toFixed(3)));
+    const data =
+      dataToAnova !== undefined &&
+      dataToAnova.length !== 0 &&
+      getAnova(dataToAnova);
+    // console.log({ finalResult });
+  }, [finalResult]);
 
   //! ---------------------------------------------------------------------
 
