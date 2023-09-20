@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   CircularProgress,
@@ -14,12 +14,12 @@ import {
   MenuItem,
   Select,
   Typography,
-} from "@mui/material";
-import CustomInput from "../../../components/common/atoms/CustomInput";
-import { CloseIcon } from "../../../assets/icons";
-import CustomButton from "../../../components/common/atoms/CustomButton";
-import { createPerbandinganAhp } from "../../../config/perbandinganAhp";
-import { dataPerbandingan } from "../../../components/common/dataPerbandingan";
+} from '@mui/material';
+import CustomInput from '../../../components/common/atoms/CustomInput';
+import { CloseIcon } from '../../../assets/icons';
+import CustomButton from '../../../components/common/atoms/CustomButton';
+import { createPerbandinganAhp } from '../../../config/perbandinganAhp';
+import { dataPerbandingan } from '../../../components/common/dataPerbandingan';
 
 const data = dataPerbandingan;
 
@@ -28,7 +28,7 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
   const navigate = useNavigate();
 
   const [perbandingan, setPerbandingan] = useState(null);
-  const [nilai, setNilai] = useState("");
+  const [nilai, setNilai] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   //!   validation
@@ -46,7 +46,7 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
 
   const handleSave = () => {
     perbandingan === null ? setIsErrorName(true) : setIsErrorName(false);
-    nilai === "" ? setIsErrorBobot(true) : setIsErrorBobot(false);
+    nilai === '' ? setIsErrorBobot(true) : setIsErrorBobot(false);
 
     const params = {};
     params.kode = perbandingan?.kode;
@@ -60,26 +60,26 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
         setOpenAddNilaiAhp(false);
         setIsLoading(false);
         setPerbandingan(null);
-        setNilai("");
+        setNilai('');
       } catch (err) {
         console.error(err);
       }
     };
 
-    perbandingan !== null && nilai !== "" && saveData();
+    perbandingan !== null && nilai !== '' && saveData();
   };
   return (
     <Dialog open={openAddNilaiAhp} fullWidth>
       <DialogTitle>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: "16px", fontWeight: 600 }}>
-            Add Kriteria
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            Add Criteria
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -89,9 +89,9 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
       <Divider />
 
       <DialogContent>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <FormControl>
-            <InputLabel id="select-label">Pilih Kategori</InputLabel>
+            <InputLabel id="select-label">Select Category</InputLabel>
             <Select
               labelId="select-label"
               id="select"
@@ -112,7 +112,7 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
             setNilai
             error={isErrorBobot}
             setValue={setNilai}
-            label="bobot "
+            label="Weight"
           />
 
           {/* button */}
@@ -120,13 +120,13 @@ const AddNilaiPerbandingan = ({ openAddNilaiAhp, setOpenAddNilaiAhp }) => {
             handleButton={handleSave}
             title={
               isLoading ? (
-                <CircularProgress size={18} sx={{ color: "#FFF" }} />
+                <CircularProgress size={18} sx={{ color: '#FFF' }} />
               ) : (
-                "Save"
+                'Save'
               )
             }
-            sxBox={{ background: "#303030" }}
-            sx={{ color: "#FFF" }}
+            sxBox={{ background: '#303030' }}
+            sx={{ color: '#FFF' }}
           />
         </Box>
       </DialogContent>

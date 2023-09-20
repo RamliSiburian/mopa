@@ -29,17 +29,17 @@ const drawerWidth = 260;
 const listMenuItem = [
   {
     pathName: '/dashboard/data-master',
-    title: 'Data Master',
+    title: 'Master Data',
     icon: <ArticleIcon />,
     subMenu: [
       {
         pathName: '/dashboard/kriteria',
-        title: 'Kriteria',
+        title: 'Criteria',
         icon: <ChecklistIcon />,
       },
       {
         pathName: '/dashboard/alternatif',
-        title: 'Alternatif',
+        title: 'Alternative ',
         icon: <ViewListIcon />,
       },
     ],
@@ -51,17 +51,17 @@ const listMenuItem = [
     subMenu: [
       {
         pathName: '/dashboard/ahp/nilaikriteriaahp',
-        title: 'Perbandingan Kriteria',
+        title: 'Criteria Comparison',
         icon: <ChecklistIcon />,
       },
       {
         pathName: '/dashboard/ahp/nilaiahp',
-        title: 'Perbandingan Alt',
+        title: 'Alternative Comparison',
         icon: <ChecklistIcon />,
       },
       {
         pathName: '/dashboard/ahp/hitung',
-        title: 'Perhitungan AHP',
+        title: 'AHP Calculation',
         icon: <CalculateIcon />,
       },
     ],
@@ -85,19 +85,19 @@ const listMenuItem = [
     subMenu: [
       {
         pathName: '/dashboard/mopa/nilaimopa',
-        title: 'Nilai Perbandingan',
+        title: 'Comparison Value',
         icon: <ChecklistIcon />,
       },
       {
         pathName: '/dashboard/mopa/hitung',
-        title: 'Perhitungan Mopa',
+        title: 'Mopa Calculation',
         icon: <CalculateIcon />,
       },
     ],
   },
   {
     pathName: '/dashboard/perbandingan',
-    title: 'Perbandingan',
+    title: 'Calculation',
     icon: <CompareIcon />,
     subMenu: [],
   },

@@ -83,7 +83,7 @@ const AddNilaiPerbandinganKriteria = ({
           }}
         >
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            Add Kriteria
+            Add Criteria
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -95,7 +95,7 @@ const AddNilaiPerbandinganKriteria = ({
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <FormControl>
-            <InputLabel id="select-label">Pilih Kategori</InputLabel>
+            <InputLabel id="select-label">Select Category</InputLabel>
             <Select
               labelId="select-label"
               id="select"
@@ -116,7 +116,7 @@ const AddNilaiPerbandinganKriteria = ({
             setNilai
             error={isErrorBobot}
             setValue={setNilai}
-            label="bobot "
+            label="Weight"
           />
 
           {/* button */}

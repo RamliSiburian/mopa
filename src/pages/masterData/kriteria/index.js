@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteKriteria, getCodes } from "../../../config/Kriteria";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteKriteria, getCodes } from '../../../config/Kriteria';
 import {
   Box,
   CircularProgress,
@@ -11,29 +11,29 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 import {
   changeNextCode,
   fetchDataKriteria,
   getAllDatakriteriaState,
-} from "../../../store/kriteria/KriteriaDatas";
-import { loadDataKriteria } from "../../../store/kriteria/UpdateKriteria";
-import { DeleteIcon, EditIcon } from "../../../assets/icons";
-import CustomDialogDelete from "../../../components/common/CustomDialogDelete";
-import AddKriteria from "../../../components/kriteria/AddKriteria";
-import UpdateKriteria from "../../../components/kriteria/UpdateKriteria";
-import { fetchDataAlternatif } from "../../../store/alternatif/AlternatifData";
+} from '../../../store/kriteria/KriteriaDatas';
+import { loadDataKriteria } from '../../../store/kriteria/UpdateKriteria';
+import { DeleteIcon, EditIcon } from '../../../assets/icons';
+import CustomDialogDelete from '../../../components/common/CustomDialogDelete';
+import AddKriteria from '../../../components/kriteria/AddKriteria';
+import UpdateKriteria from '../../../components/kriteria/UpdateKriteria';
+import { fetchDataAlternatif } from '../../../store/alternatif/AlternatifData';
 
 const Kriteria = () => {
   const [openAddKriteria, setOpenAddKriteria] = useState(false);
   const [openUpdateKriteria, setOpenUpdateKriteria] = useState(false);
   const dispatch = useDispatch();
-  const [codeToDelete, setCodeToDelete] = useState("");
+  const [codeToDelete, setCodeToDelete] = useState('');
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const { datas, loading } = useSelector(getAllDatakriteriaState);
-  const [errorMessageDelete, setErrorMessageDelete] = useState("");
+  const [errorMessageDelete, setErrorMessageDelete] = useState('');
 
   const getCode = async () => {
     try {
@@ -67,7 +67,7 @@ const Kriteria = () => {
     } finally {
       setTimeout(() => {
         setConfirmDelete(false);
-        setErrorMessageDelete("");
+        setErrorMessageDelete('');
       }, 3000);
     }
   };
@@ -88,31 +88,31 @@ const Kriteria = () => {
     <Box>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
-        <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
-          <Typography sx={{ fontSize: "16px", color: "#9E9D9D" }}>
-            Kriteria /
+        <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+          <Typography sx={{ fontSize: '16px', color: '#9E9D9D' }}>
+            Criteria /
           </Typography>
 
-          <Typography sx={{ fontSize: "16px", fontWeight: 600 }}>
-            List data
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            List of Data
           </Typography>
         </Box>
         <Box
           variant="contained"
           sx={{
-            background: "#303030",
-            width: "75px",
-            padding: "6px 8px",
-            borderRadius: "4px",
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            cursor: "pointer",
+            background: '#303030',
+            width: '75px',
+            padding: '6px 8px',
+            borderRadius: '4px',
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            cursor: 'pointer',
           }}
           onClick={() => {
             getCode();
@@ -120,18 +120,18 @@ const Kriteria = () => {
           }}
         >
           {/* <AddIcon sx={{ color: "#FFF" }} /> */}
-          <Typography sx={{ color: "#FFF" }}>Add</Typography>
+          <Typography sx={{ color: '#FFF' }}>Add</Typography>
         </Box>
       </Box>
 
       <TableContainer sx={{ mt: 3 }}>
         <Table size="small" aria-label="simple table">
           <TableHead>
-            <TableRow sx={{ background: "#FAFAFA" }}>
-              <TableCell align="left">Kode Kriteria</TableCell>
-              <TableCell align="left">Nama Kriteria</TableCell>
-              <TableCell align="left">Bobot</TableCell>
-              <TableCell align="left">Kategori</TableCell>
+            <TableRow sx={{ background: '#FAFAFA' }}>
+              <TableCell align="left">Criteria Code</TableCell>
+              <TableCell align="left">Criteria Name</TableCell>
+              <TableCell align="left">Weight</TableCell>
+              <TableCell align="left">Category</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
@@ -144,12 +144,12 @@ const Kriteria = () => {
                 <TableCell align="left">{item.kategory}</TableCell>
                 <TableCell align="center">
                   <EditIcon
-                    sx={{ color: "#F79327", cursor: "pointer" }}
+                    sx={{ color: '#F79327', cursor: 'pointer' }}
                     onClick={() => handleUpdate(item)}
                   />
                   &nbsp;&nbsp;&nbsp;
                   <DeleteIcon
-                    sx={{ color: "#B31312", cursor: "pointer" }}
+                    sx={{ color: '#B31312', cursor: 'pointer' }}
                     onClick={() => {
                       setCodeToDelete(item?.kode);
                       setConfirmDelete(true);
@@ -165,23 +165,23 @@ const Kriteria = () => {
       {loading ? (
         <Box
           sx={{
-            textAlign: "center",
-            padding: "32px 0px",
-            background: "rgba(81, 177, 92, .05)",
+            textAlign: 'center',
+            padding: '32px 0px',
+            background: 'rgba(81, 177, 92, .05)',
           }}
         >
-          <CircularProgress sx={{ color: "#51B15C" }} size={24} />
+          <CircularProgress sx={{ color: '#51B15C' }} size={24} />
         </Box>
       ) : (
         datas.length === 0 && (
           <Box
             sx={{
-              padding: "32px 0px",
-              textAlign: "center",
-              background: "rgba(243, 58, 58, .05)",
+              padding: '32px 0px',
+              textAlign: 'center',
+              background: 'rgba(243, 58, 58, .05)',
             }}
           >
-            <Typography sx={{ fontSize: "14px", color: "#F33A3A" }}>
+            <Typography sx={{ fontSize: '14px', color: '#F33A3A' }}>
               Nao data found
             </Typography>
           </Box>

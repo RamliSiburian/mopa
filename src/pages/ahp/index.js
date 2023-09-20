@@ -409,7 +409,7 @@ const AHP = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-            Perhitungan Menggunakan metode AHP
+            Calculations Using the AHP method
           </Typography>
           <Divider />
         </Box>
@@ -434,7 +434,7 @@ const AHP = () => {
                 textDecoration: 'underline',
               }}
             >
-              Langkah I : Normalisasi
+              Step I : Normalization
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -442,7 +442,7 @@ const AHP = () => {
               <Table aria-label="simple table" size="small">
                 <TableHead>
                   <TableRow sx={{ background: '#FAFAFA' }}>
-                    <TableCell align="left">Nama Alternatif</TableCell>
+                    <TableCell align="left">Alternative Name</TableCell>
                     {kodeKriteria.map((kode, index) => (
                       <TableCell align="left" key={index}>
                         {kode}
@@ -490,7 +490,7 @@ const AHP = () => {
                 textDecoration: 'underline',
               }}
             >
-              Langkah 2 : Perbandingan Berpasangan Kriteria
+              Step 2 : Pairwise Comparison of Criteria
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -498,7 +498,7 @@ const AHP = () => {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Kriteria / Kriteria</TableCell>
+                    <TableCell>Criteria / Criteria</TableCell>
                     {kodeKriteria.map((kode) => (
                       <TableCell key={kode}>{kode}</TableCell>
                     ))}
@@ -591,7 +591,7 @@ const AHP = () => {
                 textDecoration: 'underline',
               }}
             >
-              Langkah 2.1 : Nilai rata-rata
+              Step 2.1 : Mean Value
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -604,10 +604,10 @@ const AHP = () => {
                       align="center"
                       colSpan={totalPerKolom.length}
                     >
-                      Nilai Eigen
+                      Eigenvalue
                     </TableCell>
-                    <TableCell sx={{ fontWeight: 600 }}>Jumlah</TableCell>
-                    <TableCell sx={{ fontWeight: 600 }}>Rata - rata</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Sum</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Mean</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -651,8 +651,8 @@ const AHP = () => {
                   textDecoration: 'underline',
                 }}
               >
-                Langkah 3 : Perbandingan Berpasangan Alternatif terhadap
-                kriteria 1 (C{idxKode + 1})
+                Step 3 : Pairwise Comparison of Alternatives to Criteria 1 (C
+                {idxKode + 1})
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -696,12 +696,12 @@ const AHP = () => {
                 <Table size="small">
                   <TableHead>
                     <TableRow sx={{}}>
-                      <TableCell align="center">Alternatif</TableCell>
+                      <TableCell align="center">Alternative</TableCell>
                       <TableCell align="center" colSpan={kodeAlt?.length}>
-                        Nilai Eigen
+                        Eigenvalue
                       </TableCell>
-                      <TableCell>Jumlah</TableCell>
-                      <TableCell>Rata-rata</TableCell>
+                      <TableCell>Sum</TableCell>
+                      <TableCell>Mean</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -737,7 +737,7 @@ const AHP = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 4 : Perangkingan
+            Step 4 : Prioritization
           </Typography>
         </Box>
 

@@ -11,18 +11,18 @@ import {
   MenuItem,
   Select,
   Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { CloseIcon } from "../../../assets/icons";
-import CustomInput from "../../../components/common/atoms/CustomInput";
-import CustomButton from "../../../components/common/atoms/CustomButton";
-import { updateDataPerbandinganAhp } from "../../../config/perbandinganAhp";
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { CloseIcon } from '../../../assets/icons';
+import CustomInput from '../../../components/common/atoms/CustomInput';
+import CustomButton from '../../../components/common/atoms/CustomButton';
+import { updateDataPerbandinganAhp } from '../../../config/perbandinganAhp';
 import {
   changeNilaiPerbandinganAhp,
   getAllDataEditPerbandinganAhp,
-} from "../../../store/perbandinganAhp/updatePerbandinganAhp";
+} from '../../../store/perbandinganAhp/updatePerbandinganAhp';
 
 const UpdatePerbandinganAhp = ({
   openUpdatePerbandinganAhp,
@@ -43,7 +43,7 @@ const UpdatePerbandinganAhp = ({
   };
 
   const handleSave = () => {
-    nilai === "" ? setIsErrorNilai(true) : setIsErrorNilai(false);
+    nilai === '' ? setIsErrorNilai(true) : setIsErrorNilai(false);
 
     const params = {};
     // params.kode = kode;
@@ -63,20 +63,20 @@ const UpdatePerbandinganAhp = ({
       }
     };
 
-    nilai !== "" && saveData();
+    nilai !== '' && saveData();
   };
   return (
     <Dialog open={openUpdatePerbandinganAhp} fullWidth>
       <DialogTitle>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: "16px", fontWeight: 600 }}>
-            Update Kriteria
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            Update Criteria
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -86,14 +86,14 @@ const UpdatePerbandinganAhp = ({
       <Divider />
 
       <DialogContent>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <CustomInput value={deskripsi} disabled label={"deskripsi"} />
-          <CustomInput value={kode} label={"kode"} disabled />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <CustomInput value={deskripsi} disabled label={'deskripsi'} />
+          <CustomInput value={kode} label={'kode'} disabled />
           <CustomInput
             isError={isErrorNilai}
-            textError={"nilai tidak boleh kosong"}
+            textError={'value can`t empty'}
             value={nilai}
-            label={"nilai"}
+            label={'value'}
             onChange={(e) => {
               dispatch(changeNilaiPerbandinganAhp(e.target.value));
             }}
@@ -104,12 +104,12 @@ const UpdatePerbandinganAhp = ({
             handleButton={handleSave}
             title={
               isLoading ? (
-                <CircularProgress size={18} sx={{ color: "#FFF" }} />
+                <CircularProgress size={18} sx={{ color: '#FFF' }} />
               ) : (
-                "Save"
+                'Save'
               )
             }
-            sx={{ color: "#FFF" }}
+            sx={{ color: '#FFF' }}
           />
         </Box>
       </DialogContent>

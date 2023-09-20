@@ -158,11 +158,11 @@ const Alternatif = () => {
       >
         <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
           <Typography sx={{ fontSize: '16px', color: '#9E9D9D' }}>
-            Alternatif /
+            Alternative /
           </Typography>
 
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            List data
+            List of Data
           </Typography>
         </Box>
         <Box
@@ -191,8 +191,8 @@ const Alternatif = () => {
         <Table aria-label="simple table" size="small">
           <TableHead>
             <TableRow sx={{ background: '#FAFAFA' }}>
-              <TableCell align="left">Kode Alternatif</TableCell>
-              <TableCell align="left">Nama Alternatif</TableCell>
+              <TableCell align="left">Alternative Code</TableCell>
+              <TableCell align="left">Alternative Name</TableCell>
               {kodeKriteria.map((kode, index) => (
                 <TableCell align="left" key={index}>
                   {kode}

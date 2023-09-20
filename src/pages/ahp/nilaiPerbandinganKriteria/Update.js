@@ -80,7 +80,7 @@ const UpdatePerbandinganKriteriaAhp = ({
           }}
         >
           <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
-            Update Kriteria
+            Update Criteria
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -91,13 +91,13 @@ const UpdatePerbandinganKriteriaAhp = ({
 
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <CustomInput value={deskripsi} disabled label={'deskripsi'} />
-          <CustomInput value={kode} label={'kode'} disabled />
+          <CustomInput value={deskripsi} disabled label={'description'} />
+          <CustomInput value={kode} label={'code'} disabled />
           <CustomInput
             isError={isErrorNilai}
-            textError={'nilai tidak boleh kosong'}
+            textError={'value can`t empty'}
             value={nilai}
-            label={'nilai'}
+            label={'value'}
             onChange={(e) => {
               dispatch(changeNilaiPerbandinganKriteriaAhp(e.target.value));
             }}
