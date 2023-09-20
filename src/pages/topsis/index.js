@@ -308,7 +308,7 @@ const Topsis = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-            Perhitungan Menggunakan metode Topsis
+            Calculation Using the Topsis method
           </Typography>
           <Divider />
         </Box>
@@ -324,7 +324,7 @@ const Topsis = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 1 : Normalisasi (kuadrat element)
+            Step 1 : Normalization (square element)
           </Typography>
         </Box>
 
@@ -332,7 +332,7 @@ const Topsis = () => {
           <Table aria-label="simple table" size="small">
             <TableHead>
               <TableRow sx={{ background: '#FAFAFA' }}>
-                <TableCell align="left">Nama Alternatif</TableCell>
+                <TableCell align="left">Alternative Name</TableCell>
                 {kodeKriteria.map((kode, index) => (
                   <TableCell align="left" key={index}>
                     {kode}
@@ -378,7 +378,7 @@ const Topsis = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 1.1 : Normalisasi
+            Step 1.1 : Normalization
           </Typography>
         </Box>
 
@@ -421,7 +421,7 @@ const Topsis = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 2 : Normalisasi Terbobot
+            Step 2 : Weighted Normalization
           </Typography>
         </Box>
 
@@ -466,7 +466,7 @@ const Topsis = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 3 : Matriks solusi ideal
+            Step 3 : Ideal solution matrix
           </Typography>
         </Box>
 
@@ -510,7 +510,7 @@ const Topsis = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 4 : Total
+            Step 4 : Total
           </Typography>
         </Box>
 

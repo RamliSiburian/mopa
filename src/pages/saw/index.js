@@ -245,7 +245,7 @@ const Saw = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-            Perhitungan Menggunakan metode SAW
+            Calculation Using SAW method
           </Typography>
           <Divider />
         </Box>
@@ -260,7 +260,7 @@ const Saw = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 1 : Tahap Analisa
+            Step 1 : Analysis Stage
           </Typography>
         </Box>
 
@@ -268,7 +268,7 @@ const Saw = () => {
           <Table aria-label="simple table" size="small">
             <TableHead>
               <TableRow sx={{ background: '#FAFAFA' }}>
-                <TableCell align="left">Nama Alternatif</TableCell>
+                <TableCell align="left">Alternative Name</TableCell>
                 {kodeKriteria.map((kode, index) => (
                   <TableCell align="left" key={index}>
                     {kode}
@@ -303,7 +303,7 @@ const Saw = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 2 : Normalisasi
+            Step 2 : Normalization
           </Typography>
         </Box>
 
@@ -342,7 +342,7 @@ const Saw = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 3 : Perangkingan
+            Step 3 : Ranking
           </Typography>
         </Box>
 
@@ -362,7 +362,7 @@ const Saw = () => {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>Bobot</TableCell>
+                <TableCell>Weight</TableCell>
                 {bobot?.map((item, idx) => (
                   <TableCell key={idx}>{item}</TableCell>
                 ))}
@@ -390,7 +390,7 @@ const Saw = () => {
               textDecoration: 'underline',
             }}
           >
-            Perangkingan
+            Ranking
           </Typography>
         </Box>
 
@@ -398,10 +398,8 @@ const Saw = () => {
           <Table size="small">
             <TableHead>
               <TableRow sx={{ background: '#9D9D9D', fontWeight: 600 }}>
-                <TableCell sx={{ fontWeight: 600 }}>Alternatif</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>
-                  Nilai Perangkingan
-                </TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>Alternative</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>Ranking Value</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

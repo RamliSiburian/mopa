@@ -346,7 +346,7 @@ const MOPA = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-            Perhitungan Menggunakan metode MOPA
+            Calculation Using the MOPA Method
           </Typography>
           <Divider />
         </Box>
@@ -362,7 +362,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah I : Normalisasi
+            Step I : Normalization
           </Typography>
         </Box>
 
@@ -407,7 +407,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 2 : Perbandingan Berpasangan
+            Step 2 : Pairwise Comparisons
           </Typography>
         </Box>
 
@@ -415,7 +415,7 @@ const MOPA = () => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Kriteria / Kriteria</TableCell>
+                <TableCell>Criteria / Criteria</TableCell>
                 {kodeKriteria.map((kode) => (
                   <TableCell key={kode}>{kode}</TableCell>
                 ))}
@@ -463,7 +463,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 2.1 : Pembobotan
+            Step 2.1 : Weightings
           </Typography>
         </Box>
 
@@ -545,7 +545,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 2.2 : Mencari Nilai rata-rata
+            Langkah 2.2 : Find the average value
           </Typography>
         </Box>
 
@@ -558,10 +558,10 @@ const MOPA = () => {
                   align="center"
                   colSpan={totalPerKolom.length}
                 >
-                  Nilai Karakteristik
+                  Characteristic Values
                 </TableCell>
                 <TableCell sx={{ fontWeight: 600 }}>Total</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Rata - rata Wj</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>Mean Wj</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -593,7 +593,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 3 : Normalisasi dan mencari nilai cost dan benefit
+            Step 3 : Normalization and Finding Cost and Benefit Values
           </Typography>
         </Box>
 
@@ -633,7 +633,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 3.1 : Menghitung nilai cost dan benefit
+            Step 3.1 : calculate the cost and benefit values
           </Typography>
         </Box>
 
@@ -645,7 +645,7 @@ const MOPA = () => {
                 {kodeAlt.map((kode) => (
                   <TableCell key={kode}>{kode}</TableCell>
                 ))}
-                <TableCell>Bobot Awal</TableCell>
+                <TableCell>Start Weight</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -687,7 +687,7 @@ const MOPA = () => {
               textDecoration: 'underline',
             }}
           >
-            Langkah 4 : Perangkingan
+            Step 4 : Ranking
           </Typography>
         </Box>
 
@@ -695,8 +695,8 @@ const MOPA = () => {
           <Table size="small">
             <TableHead>
               <TableRow sx={{ background: '#9D9D9D', fontWeight: 600 }}>
-                <TableCell sx={{ fontWeight: 600 }}>Alternatif</TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Hasil Analisis</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>Alternative</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}>Analysis Results</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

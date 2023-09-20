@@ -199,7 +199,7 @@ const UjiAnova = () => {
         <Grid item xs={12}>
           <Box>
             <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-              Uji Anova
+              ANOVA Test
             </Typography>
             <Divider />
           </Box>
@@ -207,11 +207,11 @@ const UjiAnova = () => {
 
         <Grid item xs={12}>
           <Typography sx={{ fontSize: '14px', mb: 1 }}>
-            Silahkan pilih data yang ingin di uji
+            Please select the data you want to test
           </Typography>
           <FormControl fullWidth variant="filled">
             <InputLabel id="demo-simple-select-filled-label">
-              Data Uji
+              Test Data
             </InputLabel>
             <Select
               fullWidth

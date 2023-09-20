@@ -11,16 +11,20 @@ import {
   MenuItem,
   Select,
   Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { changeBobotKriteria, changeKategoryKriteria, changeNameKriteria, getAllDataEditKriteria } from "../../store/kriteria/UpdateKriteria";
-import CustomInput from "../common/atoms/CustomInput";
-import { CloseIcon } from "../../assets/icons";
-import CustomButton from "../common/atoms/CustomButton";
-import { updateKriteria } from "../../config/Kriteria";
-
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  changeBobotKriteria,
+  changeKategoryKriteria,
+  changeNameKriteria,
+  getAllDataEditKriteria,
+} from '../../store/kriteria/UpdateKriteria';
+import CustomInput from '../common/atoms/CustomInput';
+import { CloseIcon } from '../../assets/icons';
+import CustomButton from '../common/atoms/CustomButton';
+import { updateKriteria } from '../../config/Kriteria';
 
 const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
   const dispatch = useDispatch();
@@ -28,7 +32,6 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
   const { kode, namaKriteria, bobot, kategori } = useSelector(
     getAllDataEditKriteria
   );
-
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,11 +46,11 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
   };
 
   const handleSave = () => {
-    namaKriteria === "" ? setIsErrorName(true) : setIsErrorName(false);
+    namaKriteria === '' ? setIsErrorName(true) : setIsErrorName(false);
     bobot === 0 ? setIsErrorBobot(true) : setIsErrorBobot(false);
-    kategori === "" ? setIsErrorKategori(true) : setIsErrorKategori(false);
+    kategori === '' ? setIsErrorKategori(true) : setIsErrorKategori(false);
 
-    const params = {}; 
+    const params = {};
     // params.kode = kode;
     params.bobot = Number(bobot);
     params.namaKriteria = namaKriteria;
@@ -65,20 +68,20 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
       }
     };
 
-    namaKriteria !== "" && bobot !== 0 && kategori !== "" && saveData();
+    namaKriteria !== '' && bobot !== 0 && kategori !== '' && saveData();
   };
   return (
     <Dialog open={openUpdateKriteria} fullWidth>
       <DialogTitle>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: "16px", fontWeight: 600 }}>
-            Update Kriteria
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            Update Criteria
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -88,13 +91,13 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
       <Divider />
 
       <DialogContent>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <CustomInput value={kode} disabled label={"Kode Kriteria"} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <CustomInput value={kode} disabled label={'Criteria code'} />
           <CustomInput
             isError={isErrorName}
-            textError={"nama tidak boleh kosong"}
+            textError={'name can`t empty'}
             value={namaKriteria}
-            label={"Nama Kriteria"}
+            label={'Criteria name'}
             // setValue={dispatch(changeNameKriteria())}
             onChange={(e) => {
               dispatch(changeNameKriteria(e.target.value));
@@ -102,10 +105,10 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
           />
           <CustomInput
             isError={isErrorBobot}
-            textError={"nilai bobot harus lebih besar dari 0"}
+            textError={'weight value must be greater than 0'}
             type="number"
             value={bobot}
-            label={"Bobot Kriteria"}
+            label={'Criteria Weight'}
             // setValue={dispatch(changeBobotKriteria())}
             onChange={(e) => {
               dispatch(changeBobotKriteria(e.target.value));
@@ -114,18 +117,18 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
 
           <FormControl fullWidth variant="filled" error={isErrorKategori}>
             <InputLabel id="demo-simple-select-filled-label">
-              Kategori
+              Category
             </InputLabel>
             <Select
               fullWidth
               value={kategori}
               onChange={(e) => dispatch(changeKategoryKriteria(e.target.value))}
             >
-              <MenuItem value={"Cost"}>Cost</MenuItem>
-              <MenuItem value={"Benefit"}>Benefit</MenuItem>
+              <MenuItem value={'Cost'}>Cost</MenuItem>
+              <MenuItem value={'Benefit'}>Benefit</MenuItem>
             </Select>
             {isErrorKategori && (
-              <FormHelperText sx={{ color: "#F33A3A" }}>
+              <FormHelperText sx={{ color: '#F33A3A' }}>
                 pilih salah satu kategori
               </FormHelperText>
             )}
@@ -136,12 +139,12 @@ const UpdateKriteria = ({ openUpdateKriteria, setOpenUpdateKriteria }) => {
             handleButton={handleSave}
             title={
               isLoading ? (
-                <CircularProgress size={18} sx={{ color: "#FFF" }} />
+                <CircularProgress size={18} sx={{ color: '#FFF' }} />
               ) : (
-                "Save"
+                'Save'
               )
             }
-            sx={{ color: "#FFF" }}
+            sx={{ color: '#FFF' }}
           />
         </Box>
       </DialogContent>

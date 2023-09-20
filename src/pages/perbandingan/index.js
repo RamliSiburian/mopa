@@ -35,7 +35,7 @@ const Perbandingan = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px' }}>
-            Perbandingan hasil akhir metode AHP, Topsis, SAW, dan MOPA
+            Final results comparison of AHP, Topsis, SAW, and MOPA methods
           </Typography>
           <Divider />
         </Box>
@@ -44,7 +44,7 @@ const Perbandingan = () => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Alternatif</TableCell>
+                <TableCell align="left">Alternative</TableCell>
                 <TableCell align="left">AHP</TableCell>
                 <TableCell align="left">SAW</TableCell>
                 <TableCell align="left">Topsis</TableCell>
@@ -113,7 +113,7 @@ const Perbandingan = () => {
       <Grid item xs={12}>
         <Box>
           <Typography sx={{ fontWeight: 600, fontSize: '20px', mt: 3 }}>
-            Hasil Uji Anova
+            Anova Test Results
           </Typography>
           <Divider />
         </Box>
@@ -122,7 +122,7 @@ const Perbandingan = () => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Metode</TableCell>
+                <TableCell align="left">Method</TableCell>
                 <TableCell align="left">F-Statistic</TableCell>
                 <TableCell align="left">P-Value</TableCell>
               </TableRow>

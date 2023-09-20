@@ -12,15 +12,15 @@ import {
   MenuItem,
   Select,
   Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getAllDataAlternatifState } from "../../../store/alternatif/AlternatifData";
-import { createAlternatif } from "../../../config/Alternatif";
-import CustomInput from "../atoms/CustomInput";
-import CustomButton from "../atoms/CustomButton";
-import { CloseIcon } from "../../../assets/icons";
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getAllDataAlternatifState } from '../../../store/alternatif/AlternatifData';
+import { createAlternatif } from '../../../config/Alternatif';
+import CustomInput from '../atoms/CustomInput';
+import CustomButton from '../atoms/CustomButton';
+import { CloseIcon } from '../../../assets/icons';
 
 const AddAlternatif = ({
   openAddAlternatif,
@@ -31,7 +31,7 @@ const AddAlternatif = ({
   const navigate = useNavigate();
 
   const { nextCode } = useSelector(getAllDataAlternatifState);
-  const [namaAlternatif, setNamaAlternatif] = useState("");
+  const [namaAlternatif, setNamaAlternatif] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [nilaiKriteria, setNilaiKriteria] = useState([]);
 
@@ -75,13 +75,13 @@ const AddAlternatif = ({
     } finally {
       setIsLoading(false);
       setOpenAddAlternatif(false);
-      setNamaAlternatif("");
+      setNamaAlternatif('');
       setNilaiKriteria([]);
     }
   };
 
   const handleSave = () => {
-    namaAlternatif === "" ? setIsErrorName(true) : setIsErrorName(false);
+    namaAlternatif === '' ? setIsErrorName(true) : setIsErrorName(false);
 
     // const params = {};
     // params.kode = nextCode;
@@ -99,13 +99,13 @@ const AddAlternatif = ({
       <DialogTitle>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: "16px", fontWeight: 600 }}>
-            Add Alternatif
+          <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>
+            Add Alternative
           </Typography>
           <Typography onClick={handleClose}>
             <CloseIcon />
@@ -117,15 +117,15 @@ const AddAlternatif = ({
       <DialogContent>
         <Grid container columns={12} spacing={2}>
           <Grid item xs={12}>
-            <CustomInput value={nextCode} disabled label={"Kode Alternatif"} />
+            <CustomInput value={nextCode} disabled label={'Alternatice code'} />
           </Grid>
 
           <Grid item xs={12}>
             <CustomInput
               isError={isErrorName}
-              textError={"nama tidak boleh kosong"}
+              textError={'name can`t empty'}
               value={namaAlternatif}
-              label={"Nama Alternatif"}
+              label={'Alternative name'}
               setValue={setNamaAlternatif}
             />
           </Grid>
@@ -155,12 +155,12 @@ const AddAlternatif = ({
               handleButton={handleSave}
               title={
                 isLoading ? (
-                  <CircularProgress size={18} sx={{ color: "#FFF" }} />
+                  <CircularProgress size={18} sx={{ color: '#FFF' }} />
                 ) : (
-                  "Save"
+                  'Save'
                 )
               }
-              sx={{ color: "#FFF", width: "100%", mt: 1 }}
+              sx={{ color: '#FFF', width: '100%', mt: 1 }}
             />
           </Grid>
         </Grid>
